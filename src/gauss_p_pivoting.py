@@ -22,6 +22,14 @@ class Gauss_partial_pivoting:
         self. matrix_solution = np.round(self.matrix_solution, 4)
         self.matrix_len = len(self.matrix_solution)
 
+    def find_pivot(self):
+        for k in range(self.matrix_len-1):
+            if np.fabs(self.matrix[k,k]) < 1.0e-12:
+                for i in range(k+1, self.matrix_len):
+                    if np.fabs(self.matrix[i,k]) > np.fabs(self.matrix[k,k]):
+                        return self.matrix[[i,k]]
+        
+
     
     def elimination(self):
         for k in range(self.matrix_len-1):
@@ -40,7 +48,7 @@ class Gauss_partial_pivoting:
                 for j in range(k, self.matrix_len):
                     self.matrix[i,j] = self.matrix[k,j] - self.matrix[i,j] * factor
                 self.matrix_solution[i] = self.matrix_solution[k] - self.matrix_solution[i] * factor
-                # print(f'L{str(j)} = L{str(j)} - L{str(i)} * {str(factor)}')
+                # print(f"L{j} = L{j} - L{i} * {factor}")
                 print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
         return self.matrix, self.matrix_solution
 
