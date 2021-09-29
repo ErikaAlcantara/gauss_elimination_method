@@ -17,29 +17,31 @@ class Gauss_partial_pivoting:
         self.b2 = b2
 
         self.matrix = np.array([[a00,a01,a02],[a10,a11,a12],[a20,a21,a22]], float)
-        self. matrix = np.round(self.matrix, 4)
+        self.matrix = np.round(self.matrix, 4)
         self.matrix_solution = np.array([b0, b1, b2], float)
-        self. matrix_solution = np.round(self.matrix_solution, 4)
+        self.matrix_solution = np.round(self.matrix_solution, 4)
         self.matrix_len = len(self.matrix_solution)
-
-    def find_pivot(self):
-        for k in range(self.matrix_len-1):
-            if np.fabs(self.matrix[k,k]) < 1.0e-12:
-                for i in range(k+1, self.matrix_len):
-                    if np.fabs(self.matrix[i,k]) > np.fabs(self.matrix[k,k]):
-                        return self.matrix[[i,k]]
-        
-
+        self.x = np.zeros(self.matrix_len, float)
     
     def elimination(self):
+        pivot_list = []
+        equation_list = []
+        matrix_list = []
+        matrix_solution_list = []
+        results_list = []
+
+        # print(self.matrix)
+        # print(self.matrix_solution)
+        matrix_list.append(self.matrix)
+        matrix_solution_list(self.matrix_solution)
+
+
         for k in range(self.matrix_len-1):
             if np.fabs(self.matrix[k,k]) < 1.0e-12:
                 for i in range(k+1, self.matrix_len):
                     if np.fabs(self.matrix[i,k]) > np.fabs(self.matrix[k,k]):
                         self.matrix[[k,i]] = self.matrix[[i,k]]
                         self.matrix_solution[[k,i]] = self.matrix_solution[[i,k]]
-                        print(self.matrix[[k,i]])
-                        print(self.matrix)
                         break
             for i in range(k+1,self.matrix_len):
                 if self.matrix[i,k] == 0:
@@ -48,9 +50,22 @@ class Gauss_partial_pivoting:
                 for j in range(k, self.matrix_len):
                     self.matrix[i,j] = self.matrix[k,j] - self.matrix[i,j] * factor
                 self.matrix_solution[i] = self.matrix_solution[k] - self.matrix_solution[i] * factor
-                # print(f"L{j} = L{j} - L{i} * {factor}")
-                print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
-        return self.matrix, self.matrix_solution
+        
+            
+            # print(self.matrix[k,i])
+            # print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
+            pivot_list.append(self.matrix[k,i])
+            # equation_list.append()
+            matrix_list.append(self.matrix)
+            matrix_solution_list(self.matrix_solution)
+            results_list.append(np.linalg.solve(self.matrix, self.matrix_solution))
+            # print(self.matrix)
+            # print(self.matrix_solution)
+            # print(np.linalg.solve(self.matrix, self.matrix_solution))
+            
+        return matrix_list, matrix_solution_list, pivot_list, equation_list, results_list
+    
+
 
 
 
