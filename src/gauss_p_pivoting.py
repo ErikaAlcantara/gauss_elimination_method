@@ -24,16 +24,23 @@ class Gauss_partial_pivoting:
         self.x = np.zeros(self.matrix_len, float)
     
     def elimination(self):
-        pivot_list = []
-        equation_list = []
-        matrix_list = []
-        matrix_solution_list = []
-        results_list = []
+        steps = {
+            "pivot_list": [],
+            "equation_list": [],
+            "matrix_list": [],
+            "matrix_solution_list": [],
+            "results_list":[]
+        }
+        # pivot_list = []
+        # equation_list = []
+        # matrix_list = []
+        # matrix_solution_list = []
+        # results_list = []
 
         # print(self.matrix)
         # print(self.matrix_solution)
-        matrix_list.append(self.matrix)
-        matrix_solution_list(self.matrix_solution)
+        # matrix_list.append(self.matrix)
+        # matrix_solution_list(self.matrix_solution)
 
 
         for k in range(self.matrix_len-1):
@@ -50,22 +57,24 @@ class Gauss_partial_pivoting:
                 for j in range(k, self.matrix_len):
                     self.matrix[i,j] = self.matrix[k,j] - self.matrix[i,j] * factor
                 self.matrix_solution[i] = self.matrix_solution[k] - self.matrix_solution[i] * factor
-        
+                steps["equation_list"].append("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
+                # equation_list.append("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
             
             # print(self.matrix[k,i])
             # print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
-            pivot_list.append(self.matrix[k,i])
-            # equation_list.append()
-            matrix_list.append(self.matrix)
-            matrix_solution_list(self.matrix_solution)
-            results_list.append(np.linalg.solve(self.matrix, self.matrix_solution))
+            steps["pivot_list"].append(self.matrix[k,i])
+            # pivot_list.append(self.matrix[k,i])
+            
+            steps["matrix_list"].append(self.matrix)
+            # matrix_list.append(self.matrix)
+            steps["matrix_solution_list"].append(self.matrix_solution)
+            # matrix_solution_list.append(self.matrix_solution)
+            steps["results_list"].append(np.linalg.solve(self.matrix, self.matrix_solution))
+            # results_list.append(np.linalg.solve(self.matrix, self.matrix_solution))
             # print(self.matrix)
             # print(self.matrix_solution)
             # print(np.linalg.solve(self.matrix, self.matrix_solution))
-            
-        return matrix_list, matrix_solution_list, pivot_list, equation_list, results_list
-    
-
+        return steps
 
 
 
