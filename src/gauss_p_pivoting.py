@@ -76,10 +76,8 @@ class Gauss_partial_pivoting:
                 print(np.round(self.matrix, decimals=4))
                 print(np.round(self.matrix_solution, decimals=4))
             
-            
-            
-            steps["matrix_list"].append(np.round(self.matrix, decimals=4))
-            steps["matrix_solution_list"].append(np.round(self.matrix_solution, decimals=4))
+                steps["matrix_list"].append(np.round(self.matrix, decimals=4))
+                steps["matrix_solution_list"].append(np.round(self.matrix_solution, decimals=4))
         steps["results_list"].append(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))
         print(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))    
             

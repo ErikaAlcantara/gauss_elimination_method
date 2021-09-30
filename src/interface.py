@@ -55,25 +55,29 @@ gauss = Gauss_partial_pivoting(a00,a10,a20,a01,a11,a21,a02,a12,a22,b0,b1,b2)
 # gauss = Gauss_partial_pivoting(4,15,5,2,4,8,20,10,5,4,5,8)
 
 a = gauss.elimination()
-print(a)
+
 
 pivot_list = a["pivot_list"]
 equation_list = a["equation_list"]
 matrix_list = a["matrix_list"]
 matrix_solution_list = a["matrix_solution_list"]
 results_list = a["results_list"]
-results = list(results_list)
-matrix = list(matrix_list)
+# results = list(results_list)
+# matrix = matrix_list.tolist()
+
 
 st.markdown("***")
 st.header("Resultado do Sistema:")
+for i in range(len(results_list)):
+    st.write(results_list[i])
 # st.write(str(results_list[0]).split())
 
-st.write(pivot_list)
-st.write(equation_list)
-st.write(matrix_list)
-st.write(matrix_solution_list)
-st.write(results_list)
+# st.write(pivot_list)
+# st.write(equation_list)
+
+# st.write(matrix_list)
+# st.write(matrix_solution_list)
+# st.write(results_list)
 
 
 
@@ -89,35 +93,39 @@ for i in range(len(equation_list)):
     st.markdown("### Equação: " + str(equation_list[i]))
     st.write("#")
 
-    st.write(matrix_list)
-
-    col1, col2, col3,col4,col5, col6 = st.columns(6)
+    col1, col2 = st.columns([2,1])
     with col1:
         st.write(matrix_list[i])
-        st.write(a10)
-        st.write(a20)
-
     with col2:
-        st.write(a01)
-        st.write(a11)
-        st.write(a21)
+        st.write(matrix_solution_list[i])
 
-    with col3:
-        st.write(a02)
-        st.write(a12)
-        st.write(a22)
+    # col1, col2, col3,col4,col5, col6 = st.columns(6)
+    # with col1:
+    #     st.write(str(matrix_list[i]))
+    #     st.write(a10)
+    #     st.write(a20)
 
-    with col4:
-        st.write("x0")
-        st.write("x1")
-        st.write("x2")
+    # with col2:
+    #     st.write(a01)
+    #     st.write(a11)
+    #     st.write(a21)
 
-    with col5:
-        st.write("=")
-        st.write("=")
-        st.write("=")
+    # with col3:
+    #     st.write(a02)
+    #     st.write(a12)
+    #     st.write(a22)
 
-    with col6:
-        st.write(b0)
-        st.write(b1)
-        st.write(b2)
+    # with col4:
+    #     st.write("x0")
+    #     st.write("x1")
+    #     st.write("x2")
+
+    # with col5:
+    #     st.write("=")
+    #     st.write("=")
+    #     st.write("=")
+
+    # with col6:
+    #     st.write(b0)
+    #     st.write(b1)
+    #     st.write(b2)
