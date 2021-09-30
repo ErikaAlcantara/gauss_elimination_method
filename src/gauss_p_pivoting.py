@@ -62,20 +62,26 @@ class Gauss_partial_pivoting:
                 self.matrix_solution[i] = self.matrix_solution[k] - self.matrix_solution[i] * factor
                 steps["equation_list"].append("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(np.round(factor, decimals=4)))
             
-            # print(self.matrix[k,i])
-            # print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
-            steps["pivot_list"].append(np.round(self.matrix[k,i], decimals=4))
-            steps["matrix_list"].append(self.matrix)
-            steps["matrix_solution_list"].append(self.matrix_solution)
-        steps["results_list"].append(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))
+            print(np.round(self.matrix[k,i], decimals=4))
+            print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(np.round(factor, decimals=4)))
+            print(np.round(self.matrix, decimals=4))
+            print(np.round(self.matrix_solution, decimals=4))
             
+            
+            steps["pivot_list"].append(np.round(self.matrix[k,i], decimals=4))
+            steps["matrix_list"].append(np.round(self.matrix, decimals=4))
+            steps["matrix_solution_list"].append(np.round(self.matrix_solution, decimals=4))
+        steps["results_list"].append(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))
+        print(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))    
             
         # print(steps["results_list"])
             # results_list.append(np.linalg.solve(self.matrix, self.matrix_solution))
-            # print(self.matrix)
-            # print(self.matrix_solution)
-            # print(np.linalg.solve(self.matrix, self.matrix_solution))
+            
         return steps
+
+
+
+
 
     # def back_substitution(self):
     #     self.x[self.matrix_len - 1] = self.matrix_solution[self.matrix_len - 1] / self.matrix[self.matrix_len-1, self.matrix_len-1]
@@ -101,6 +107,5 @@ class Gauss_partial_pivoting:
 
 
     
-
 
 

@@ -69,6 +69,9 @@ st.markdown("***")
 st.header("Resultado do Sistema:")
 st.write(str(results_list[0]).split())
 
+st.write(matrix_list)
+
+
 
 # st.write("x0 =  " + str(results_list[0]))
 # st.write("x1 =  " + str(results_list[1]))
@@ -112,4 +115,3 @@ for i in range(len(equation_list) - 1):
         st.write(b0)
         st.write(b1)
         st.write(b2)
-
