@@ -53,6 +53,11 @@ class Gauss_partial_pivoting:
                         self.matrix[[k,i]] = self.matrix[[i,k]]
                         self.matrix_solution[[k,i]] = self.matrix_solution[[i,k]]
                         break
+            
+            for i in range(k+1,self.matrix_len):
+                steps["pivot_list"].append(np.round(self.matrix[k,k], decimals=4))
+                steps["equation_list"].append("L" + str(i+1) +  " = " + "L" + str(k+1) + " -" + " L" + str(i+1) + " * " + "(" + "L " + str(k+1) + " / "  +  "L " + str(i+1) + ")")
+                
             for i in range(k+1,self.matrix_len):
                 if self.matrix[i,k] == 0:
                     continue
@@ -60,15 +65,16 @@ class Gauss_partial_pivoting:
                 for j in range(k, self.matrix_len):
                     self.matrix[i,j] = self.matrix[k,j] - self.matrix[i,j] * factor
                 self.matrix_solution[i] = self.matrix_solution[k] - self.matrix_solution[i] * factor
-                steps["equation_list"].append("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(np.round(factor, decimals=4)))
+                # steps["equation_list"].append("L" + str(j) +  " = " + "L" + str(k+1) + " -" + " L" + str(j) + " * " + "(" + "L " + str(k+1) + " / "  +  "L " + str(j) + ")")
             
+            print(i, j, k)
             print(np.round(self.matrix[k,i], decimals=4))
             print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(np.round(factor, decimals=4)))
             print(np.round(self.matrix, decimals=4))
             print(np.round(self.matrix_solution, decimals=4))
             
             
-            steps["pivot_list"].append(np.round(self.matrix[k,i], decimals=4))
+            
             steps["matrix_list"].append(np.round(self.matrix, decimals=4))
             steps["matrix_solution_list"].append(np.round(self.matrix_solution, decimals=4))
         steps["results_list"].append(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))

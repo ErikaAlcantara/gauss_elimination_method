@@ -67,9 +67,15 @@ matrix = list(matrix_list)
 
 st.markdown("***")
 st.header("Resultado do Sistema:")
-st.write(str(results_list[0]).split())
+# st.write(str(results_list[0]).split())
 
+st.write(pivot_list)
+st.write(equation_list)
 st.write(matrix_list)
+st.write(matrix_solution_list)
+st.write(results_list)
+
+
 
 
 
@@ -77,7 +83,7 @@ st.write(matrix_list)
 # st.write("x1 =  " + str(results_list[1]))
 # st.write("x2 =  " + str(results_list[2]))
 
-for i in range(len(equation_list) - 1):
+for i in range(len(equation_list)):
     st.markdown("### Pivô: " + str(pivot_list[i]))
 
     st.markdown("### Equação: " + str(equation_list[i]))
