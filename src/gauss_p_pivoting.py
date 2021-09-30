@@ -1,5 +1,7 @@
 import numpy as np
 
+
+
 class Gauss_partial_pivoting:
 
     def __init__(self, a00, a10, a20, a01, a11, a21, a02, a12, a22, b0, b1, b2):
@@ -21,7 +23,8 @@ class Gauss_partial_pivoting:
         self.matrix_solution = np.array([b0, b1, b2], float)
         self.matrix_solution = np.round(self.matrix_solution, 4)
         self.matrix_len = len(self.matrix_solution)
-        self.x = np.zeros(self.matrix_len, float)
+        self.x = np.zeros(self.matrix_len)
+        # self.x = np.round(self.x, 4)
     
     def elimination(self):
         steps = {
@@ -60,6 +63,13 @@ class Gauss_partial_pivoting:
                 steps["equation_list"].append("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
                 # equation_list.append("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
             
+        self.x[self.matrix_len - 1] = self.matrix_solution[self.matrix_len - 1] / self.matrix[self.matrix_len-1, self.matrix_len-1]
+    
+        for i in range(self.matrix_len-2, -1, -1):
+            sum_matrix_x = 0
+            for j in range(i+1, self.matrix_len):
+                sum_matrix_x += self.matrix[i,j] * self.x[j]
+                self.x[i] = (self.matrix_solution[i] - sum_matrix_x) / self.matrix[i,i]
             # print(self.matrix[k,i])
             # print("L" + str(j) +  " = " + "L" + str(j) + " -" + " L" + str(i) + " * " + str(factor))
             steps["pivot_list"].append(self.matrix[k,i])
@@ -69,7 +79,10 @@ class Gauss_partial_pivoting:
             # matrix_list.append(self.matrix)
             steps["matrix_solution_list"].append(self.matrix_solution)
             # matrix_solution_list.append(self.matrix_solution)
-            steps["results_list"].append(np.linalg.solve(self.matrix, self.matrix_solution))
+            steps["results_list"].append(self.x)
+
+            print(steps["results_list"])
+            # steps["results_list"].append(np.linalg.solve(self.matrix, self.matrix_solution))
             # results_list.append(np.linalg.solve(self.matrix, self.matrix_solution))
             # print(self.matrix)
             # print(self.matrix_solution)
