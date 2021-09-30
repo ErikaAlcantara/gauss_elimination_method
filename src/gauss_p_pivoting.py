@@ -24,7 +24,6 @@ class Gauss_partial_pivoting:
         self.matrix_solution = np.round(self.matrix_solution, 4)
         self.matrix_len = len(self.matrix_solution)
         self.x = np.zeros(self.matrix_len)
-        # self.x = np.round(self.x, 4)
     
     def elimination(self):
         steps = {
@@ -34,17 +33,6 @@ class Gauss_partial_pivoting:
             "matrix_solution_list": [],
             "results_list":[]
         }
-        # pivot_list = []
-        # equation_list = []
-        # matrix_list = []
-        # matrix_solution_list = []
-        # results_list = []
-
-        # print(self.matrix)
-        # print(self.matrix_solution)
-        # matrix_list.append(self.matrix)
-        # matrix_solution_list(self.matrix_solution)
-
 
         for k in range(self.matrix_len-1):
             if np.fabs(self.matrix[k,k]) < 1.0e-12:
@@ -57,11 +45,7 @@ class Gauss_partial_pivoting:
             for i in range(k+1,self.matrix_len):
                 steps["pivot_list"].append(np.round(self.matrix[k,k], decimals=4))
                 steps["equation_list"].append("L" + str(i+1) +  " = " + "L" + str(k+1) + " -" + " L" + str(i+1) + " * " + "(" + "L " + str(k+1) + " / "  +  "L " + str(i+1) + ")")
-                
-                print((np.round(self.matrix[k,k], decimals=4)))
-                print(("L" + str(i+1) +  " = " + "L" + str(k+1) + " -" + " L" + str(i+1) + " * " + "(" + "L " + str(k+1) + " / "  +  "L " + str(i+1) + ")"))
-
-
+            
             for i in range(k+1,self.matrix_len):
                 if self.matrix[i,k] == 0:
                     continue
@@ -69,49 +53,12 @@ class Gauss_partial_pivoting:
                 for j in range(k, self.matrix_len):
                     self.matrix[i,j] = self.matrix[k,j] - self.matrix[i,j] * factor
                 self.matrix_solution[i] = self.matrix_solution[k] - self.matrix_solution[i] * factor
-                # steps["equation_list"].append("L" + str(j) +  " = " + "L" + str(k+1) + " -" + " L" + str(j) + " * " + "(" + "L " + str(k+1) + " / "  +  "L " + str(j) + ")")
-            
-
-            
-                print(np.round(self.matrix, decimals=4))
-                print(np.round(self.matrix_solution, decimals=4))
             
                 steps["matrix_list"].append(np.round(self.matrix, decimals=4))
                 steps["matrix_solution_list"].append(np.round(self.matrix_solution, decimals=4))
         steps["results_list"].append(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))
-        print(np.round(np.linalg.solve(self.matrix, self.matrix_solution), decimals = 4))    
-            
-        # print(steps["results_list"])
-            # results_list.append(np.linalg.solve(self.matrix, self.matrix_solution))
-            
+
         return steps
-
-
-
-
-
-    # def back_substitution(self):
-    #     self.x[self.matrix_len - 1] = self.matrix_solution[self.matrix_len - 1] / self.matrix[self.matrix_len-1, self.matrix_len-1]
-    #     for i in range(self.matrix_len-2, -1, -1):
-    #         sum_matrix_x = 0
-    #         for j in range(i+1, self.matrix_len):
-    #             sum_matrix_x += self.matrix[i,j] * self.x[j]
-    #             self.x[i] = (self.matrix_solution[i] - sum_matrix_x) / self.matrix[i,i]
-
-    #             steps["results_list"].append(self.x)
-
-
-
-
-
-
-
-
-
-        
-
-
-
 
     
 
